@@ -2,9 +2,9 @@
 project: 85-zinc-slides-mcp
 project_path: gsd-coreops-projects/PROJ299-zinc-slides-mcp
 project_id: PROJ299
-phase: plan
-current_wave: 1
-last_updated: 2026-04-19T20:30:00Z
+phase: build
+current_wave: 4
+last_updated: 2026-04-19T22:00:00Z
 notion_page_id: 347b5fdb-c0bc-81a5-965a-ffff3980bec4
 ops_board_page_id: 347b5fdb-c0bc-81a5-965a-ffff3980bec4
 due: 2026-04-25
@@ -40,21 +40,25 @@ decisions:
 - [x] Brief written, templates catalogued from Figma .deck file
 - [x] Architecture designed (MCP + Railway + Google Slides API)
 - [x] 8 brand templates documented with colours, layouts, elements
-
-## In Progress
-- [ ] T1: Fork + clone base repo
-- [ ] T2: Get Google service account credential
+- [x] zinc_auth.py — OAuth token refresh + Google API service builders
+- [x] zinc_brand_templates.py — all 8 templates rendering correctly against live API
+- [x] zinc_slides_tools.py — 7 MCP tools (create, get, add, update, delete, reorder, list)
+- [x] zinc_server.py — FastMCP entry point (SSE transport)
+- [x] All 8 templates visually reviewed and passing (screenshots taken)
+- [x] Fixes: section_divider heading text overflow, agenda heading left-alignment
+- [x] /zinc-brand-colours skill created at ~/.claude/skills/zinc-brand-colours/SKILL.md
+- [x] Code pushed to github.com:dancourse-zincwork/zinc-slides-mcp.git
 
 ## Next
-1. Wave 1: T1 + T2 (parallel)
-2. Wave 2: MCP scaffold + Slides API connection
-3. Wave 3: Template renderer
-4. Wave 4: Edit tools + E2E test
+- [ ] Deploy to Railway (deferred — see BRIEF.md)
+- [ ] Register as Claude Enterprise org connector (after Railway)
 
 ## Blockers
 (none)
 
 ## Notes for Next Session
+- Test deck (all 8 templates): https://docs.google.com/presentation/d/14OhdRMucK8z_aqtlf09eL21BV-WOvL1Wid5IADlqy0I/edit
 - Build folder ID: 1WKRlte3nCKMgoiOct5zM70Ylon_ol_Af
-- Brand colours + templates fully documented in BRIEF.md
-- taylorwilsdon/google_workspace_mcp is the fork base
+- OAuth tokens stored in .env (from google-slides skill)
+- Server runs: cd PROJ299-zinc-slides-mcp && .venv/bin/python3 zinc_server.py
+- Railway deploy + Enterprise connector registration pending

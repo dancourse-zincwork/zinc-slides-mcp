@@ -131,6 +131,15 @@ def _pill(obj_id: str, x: int, y: int, label: str,
     return reqs
 
 
+def _para_align(obj_id: str, alignment: str = "START") -> dict:
+    return {"updateParagraphStyle": {
+        "objectId": obj_id,
+        "textRange": {"type": "ALL"},
+        "style": {"alignment": alignment},
+        "fields": "alignment",
+    }}
+
+
 def _slide_bg(slide_obj_id: str, colour_name: str) -> dict:
     return {"updatePageProperties": {
         "objectId": slide_obj_id,
@@ -186,6 +195,7 @@ def build_agenda_slide(slide_id: str, content: dict) -> list[dict]:
     reqs.append(_no_border(head_id))
     reqs.append(_text(head_id, content.get("heading", "Agenda")))
     reqs.append(_text_style(head_id, FONT_HEADING, 72, "text", italic=True))
+    reqs.append(_para_align(head_id, "START"))
     # Hotpink underline
     ul_id = f"{slide_id}_ul"
     reqs.append(_rect(ul_id, int(INCH * 1.5), int(INCH * 1.75), int(INCH * 2.5), 228_600))
@@ -212,13 +222,14 @@ def build_agenda_slide(slide_id: str, content: dict) -> list[dict]:
 def build_section_divider_slide(slide_id: str, content: dict) -> list[dict]:
     reqs: list[dict] = [_slide_bg(slide_id, "blush")]
     head_id = f"{slide_id}_head"
-    reqs.append(_rect(head_id, int(INCH * 1), int(INCH * 1.5), int(INCH * 7.5), int(INCH * 1.8)))
+    reqs.append(_rect(head_id, int(INCH * 1), int(INCH * 0.8), int(INCH * 7.5), int(INCH * 3.0)))
     reqs.append(_fill(head_id, "blush"))
     reqs.append(_no_border(head_id))
     reqs.append(_text(head_id, content.get("heading", "")))
     reqs.append(_text_style(head_id, FONT_HEADING, 80, "text"))
+    reqs.append(_para_align(head_id, "CENTER"))
     sub_id = f"{slide_id}_sub"
-    reqs.append(_rect(sub_id, int(INCH * 1), int(INCH * 3.5), int(INCH * 7.5), int(INCH * 0.5)))
+    reqs.append(_rect(sub_id, int(INCH * 1), int(INCH * 4.1), int(INCH * 7.5), int(INCH * 0.5)))
     reqs.append(_fill(sub_id, "blush"))
     reqs.append(_no_border(sub_id))
     sub = content.get("subheading", "")
