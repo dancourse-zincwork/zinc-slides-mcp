@@ -53,8 +53,18 @@ def create_zinc_presentation(title: str, slides: list) -> str:
     Args:
         title: Presentation title.
         slides: List of slide dicts, each with 'template' and 'content' keys.
-                Templates: title, agenda, section_divider, metrics_stats,
-                feature_update, demo_presenter, team_roadmap, release_list.
+
+    Templates and their content keys:
+        title        — {title, subtitle?, date?}
+        content      — {heading, body}  (general text slide)
+        two_column   — {heading, left_heading?, left_body, right_heading?, right_body}
+        section      — {heading, subheading?}  (chapter break)
+        big_number   — {number, label, context?}  (large stat callout)
+        blank        — {}  (cream background, no elements)
+        stat_cards   — {label?, metrics: [{name, value, trend?, trend_up?}]}
+        numbered_items — {badge?, title, subtitle?, items: [{title, description?, status?}]}
+        card_grid    — {label?, cards: [{label, title, description?}]}  (2x2 grid)
+        timeline     — {label?, title?, items: [{title, description?, timeline?}]}
 
     Returns:
         Google Slides URL.
